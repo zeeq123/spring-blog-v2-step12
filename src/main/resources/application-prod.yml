@@ -3,4 +3,28 @@ server:
     encoding:
       charset: utf-8
       force: true
-  port: 5000
+    # url rewrite 문제 해결
+    session:
+      tracking-modes: cookie
+  port: 8080
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://${RDS_HOST}:3306/blogdb
+    username: ${RDS_USERNAME}
+    password: ${RDS_PASSWORD}
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    properties:
+      hibernate:
+        default_batch_fetch_size: 10
+        dialect: org.hibernate.dialect.MysqlDialect
+    open-in-view: false
+
+logging:
+  level:
+    org.hibernate.orm.jdbc.bind: INFO
+    shop.mtcoding.blog: INFO
